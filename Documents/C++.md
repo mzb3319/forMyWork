@@ -103,15 +103,15 @@ int vals[10];
 int error=-1;
 void main()
 {
-	put(0)=10; //以put(0)函数值作为左值，等价于vals[0]=10; 
-	put(9)=20; //以put(9)函数值作为左值，等价于vals[9]=20; 
-	cout<<vals[0]; 
-	cout<<vals[9];
+    put(0)=10; //以put(0)函数值作为左值，等价于vals[0]=10; 
+    put(9)=20; //以put(9)函数值作为左值，等价于vals[9]=20; 
+    cout<<vals[0]; 
+    cout<<vals[9];
 } 
 int &put(int n)
 {
-	if (n>=0 && n<=9 ) return vals[n]; 
-	else { cout<<"subscript error"; return error; }
+    if (n>=0 && n<=9 ) return vals[n]; 
+    else { cout<<"subscript error"; return error; }
 }
 ```
 （5）在另外的一些操作符中，却千万不能返回引用：`+-*/ `四则运算符。它们不能返回引用，`Effective C++[1]`的Item23详细的讨论了这个问题。主要原因是这四个操作符没有**side effect**，因此，它们必须构造一个对象作为返回值，可选的方案包括：返回一个对象、返回一个局部变量的引用，返回一个new分配的对象的引用、返回一个静态对象引用。根据前面提到的引用作为返回值的三个规则，第2、3两个方案都被否决了。静态对象的引用又因为`((a+b) == (c+d))`会永远为true而导致错误。所以可选的只剩下返回一个对象了。
