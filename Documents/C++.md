@@ -11,15 +11,16 @@ delete会调用对象的析构函数,和new对应free只会释放内存，new调
 ---
 ### 2.delete与 delete []区别
 delete只会调用一次析构函数，而delete[]会调用每一个成员的析构函数。在More Effective C++中有更为详细的解释：“当delete操作符用于数组时，它为每个数组元素调用析构函数，然后调用operator delete来释放内存。”delete与new配套，delete []与new []配套
-
-	MemTest *mTest1=new MemTest[10];
-	MemTest *mTest2=new MemTest;
-	Int *pInt1=new int [10];
-	Int *pInt2=new int;
-	delete[]pInt1; //-1-
-	delete[]pInt2; //-2-
-	delete[]mTest1;//-3-
-	delete[]mTest2;//-4-
+```C++
+MemTest *mTest1=new MemTest[10];
+MemTest *mTest2=new MemTest;
+Int *pInt1=new int [10];
+Int *pInt2=new int;
+delete[]pInt1; //-1-
+delete[]pInt2; //-2-
+delete[]mTest1;//-3-
+delete[]mTest2;//-4-
+```
 在-4-处报错。
 
 这就说明：对于内建简单数据类型，delete和delete[]功能是相同的。对于自定义的复杂数据类型，delete和delete[]不能互用。delete[]删除一个数组，delete删除一个指针。简单来说，用new分配的内存用delete删除；用new[]分配的内存用delete[]删除。delete[]会调用数组元素的析构函数。内部数据类型没有析构函数，所以问题不大。如果你在用delete时没用括号，delete就会认为指向的是单个对象，否则，它就会认为指向的是一个数组。
@@ -42,17 +43,18 @@ delete只会调用一次析构函数，而delete[]会调用每一个成员的析
 
 ---
 ### 6.求下面函数的返回值（微软）
-
-	int func(x) 
-	{ 
-		int countx = 0; 
-		while(x) 
-		{ 
-			countx ++; 
-			x = x&(x-1); 
-		} 
-		return countx; 
-	} 
+```C++
+int func(x) 
+{ 
+    int countx = 0; 
+    while(x) 
+    { 
+        countx ++; 
+        x = x&(x-1); 
+    } 
+    return countx; 
+}
+```
 假定x = 9999。 答案：8
 思路：将x转化为2进制，看含有的1的个数。
 
@@ -72,18 +74,20 @@ delete只会调用一次析构函数，而delete[]会调用每一个成员的析
 `const 类型标识符 &引用名=目标变量名`；
 
 例1
-
-	int a ;
-	const int &ra=a;
-	ra=1; //错误
-	a=1; //正确
+```C++
+int a ;
+const int &ra=a;
+ra=1; //错误
+a=1; //正确
+```
 例2
-
-	string foo();
-	void bar(string & s);
-	//那么下面的表达式将是非法的：
-	bar(foo( ));
-	bar("hello world");
+```C++
+string foo();
+void bar(string & s);
+//那么下面的表达式将是非法的：
+bar(foo( ));
+bar("hello world");
+```
 原因在于`foo( )`和`"hello world"`串都会产生一个临时对象，而在C++中，这些临时对象都是const类型的。因此上面的表达式就是试图将一个const类型的对象转换为非const类型，这是非法的。引用型参数应该在能被定义为const的情况下，尽量定义为const 。
 
 ---
