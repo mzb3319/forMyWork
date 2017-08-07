@@ -358,8 +358,11 @@ const int * const p;//p是一个指向const int类型的const指针，p的值不
 
 扩展：
 >C++虚函数==Java普通函数
+
 >C++纯虚函数==Java抽象函数
+
 >C++抽象类==Java抽象类
+
 >C++虚基类==Java接口
 
 ---
