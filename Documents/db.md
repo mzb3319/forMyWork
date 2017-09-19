@@ -211,6 +211,10 @@ delete语句是dml,这个操作会放到rollback segement中,事务提交之后�
 SQL(Structured Query Language),结构化查询语言,是关系数据库的标准语言.
 SQL集数据查询(Data Query),数据操纵(Data Manipulation),数据定义(Data Definition),数据控制(Data Control)功能于一体
 SQL主要特点有:综合统一,高度非过程化,面向集合的操作方式,以同一种语法结构提供多种使用方式,语言简洁,易学易用.
+模式数据定义语言(Schema Data Definition Language,模式DDL)
+外模式数据定义语言(Subschema Data Definition Language,外模式DDL或子模式DDL)
+数据存储有关的描述语言(Data Storage Description Language,DSDL)
+数据操纵语言(Data Manipulation Language,DML)
 
 实现数据库系统安全的计数重要的有存取控制技术,视图技术,审计技术
 数据库角色是一组权限的集合,使用角色来管理数据库权限可以简化授权的过程.

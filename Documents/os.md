@@ -209,4 +209,12 @@ dll是否有独立的堆栈？这个问题不好回答，或者说这个问题�
 FCFS(先来先服务)，优先级，时间片轮转，多级反馈
 
 ---
-### 22.
+### 22.Linux 五种IO模型
+[参考1](http://www.jianshu.com/p/486b0965c296)
+[参考2](https://github.com/LEAGUE-OF-BME/InterviewFAQ/blob/master/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B.md)
+[参考3](http://blog.csdn.net/zhoudaxia/article/details/8974779)
+[参考4](https://segmentfault.com/a/1190000003063859#articleHeader14)
+
+---
+### 23.Linux Socket建立过程
+[Linux Socket](http://www.cnblogs.com/cy568searchx/p/4211124.html                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           )
