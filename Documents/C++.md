@@ -1604,6 +1604,83 @@ stack是用来存储局部变量以及每次函数调用时所需保存的信息
 
 
 ---
+### 105.一道多线程题（51信用卡），多线程从文件中读数据str[1..n]，读到数据中找固定的字符串[s]，统计包含这个字符串[s]的str有多少个.也不知道我写的对不对，先这样吧。。。
+```C++
+#include "iostream"
+#include "vector"
+#include "unordered_map"
+#include "fstream"
+#include "thread"
+#include "mutex"
+#include "set"
+#include "map"
+#include "chrono"
+
+using namespace std;
+
+mutex mtx,num_lock;
+
+void fun(fstream &fs,vector<thread::id> &table)
+{
+//    chrono::milliseconds t(10);
+    string tmp;
+    while(!fs.eof())
+    {
+        mtx.lock();
+        if(fs.eof())
+        {
+            mtx.unlock();
+            break;
+        }
+        getline(fs,tmp);
+        mtx.unlock();
+
+        auto f=tmp.find("/*mzb*/");
+        if(f!=-1)
+        {
+            num_lock.lock();
+            table.push_back(this_thread::get_id());
+            num_lock.unlock();
+        }
+//        this_thread::sleep_for(t);
+    }
+
+}
+
+int main()
+{
+    fstream fs("/home/m/Documents/linux/mzb.txt",fstream::in);
+    vector<thread::id> table;
+    thread th1(fun,ref(fs),ref(table)),th2(fun,ref(fs),ref(table));
+
+//    //test
+//    string tmp;
+//    int ret=0;
+//    while(getline(fs,tmp))
+//    {
+//        if(tmp.find("/*mzb*/")!=string::npos)
+//            ++ret;
+//    }
+//    cout<<ret<<endl;
+
+    while(!fs.eof());
+//    {
+//        static int count=0;
+//        cout<<'\r'<<"waiting."+string(count++%3,'.')<<flush;
+//        this_thread::sleep_for(chrono::milliseconds(1000));
+//    }
+//    cout<<endl;
+//    for(auto &it:table)
+//        cout<<it<<endl;
+    cout<<table.size()<<endl;
+
+    th1.join();
+    th2.join();
+    return 0;
+}
+```
+
+---
 ### 待解决问题
 STL相关问题：
 - STL 内存分配方式
