@@ -324,3 +324,6 @@ COMMIT或者ROLLBACK结束事务.
 
 意向共享锁(Intent Share Lock,IS锁),意向拍它锁(Intent Exclusive Lock,IX),共享意向拍它锁(Share Intent Exclusive Loxk,SIX)
 
+DROP TABLE时选择restrict和cascade的区别：若选择restrict，则欲删除的基本表不能被其他表的约束所引用（如check，foreign key 等约束），不能有视图，不能有触发器，不能有存储过程或函数等。若选择cascade，则对欲删除的表没有限制条件，但相关的依赖对象，例如视图，都将被一起删除。
+
+select执行顺序：![select执行顺序](../lib/dbselect.jpg  "select执行顺序")
